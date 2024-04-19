@@ -195,8 +195,13 @@ class GemmaMLP(nn.Module):
         self.down_proj = Linear(intermediate_size, hidden_size, quant)
 
     def forward(self, x):
+        #x is input
+        print(x)
+        print(type(x))
+        exit()
         gate = self.gate_proj(x)
         gate = F.gelu(gate, approximate="tanh")
+        #gate = output
         up = self.up_proj(x)
         fuse = gate * up
         outputs = self.down_proj(fuse)
